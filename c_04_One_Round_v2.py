@@ -4,34 +4,82 @@ import random
 def initial_points(which_player):
     """Roll dice twice and return total / if double points apply"""
 
-double_user = "no"
+    double = "no"
+
+    # Roll the dice for the user and note if they got a double
+    roll_one = random.randint(1, 6)
+    roll_two = random.randint(1, 6)
+
+    if roll_one == roll_two:
+        double = "yes"
+
+    total = roll_one + roll_two
+    print(f"{which_player} - Roll 1: {roll_one} \t| Roll2: {roll_two} \t| Total: {total}")
+
+    return total, double
+
+# Main starts here...
+
 
 # Roll the dice for the user and note if they got a double
-user_one = random.randint(1, 6)
-user_two = random.randint(1, 6)
-
-if user_one == user_two:
-    double_user = "yes"
-
-# Intialise rounds points
-user_points = 0
-comp_points = 0
+initial_user = initial_points("User")
+initial_comp = initial_points("Comp")
 
 
-# roll the dice for the computer
-comp_one = random.randint(1, 6)
-comp_two = random.randint(1, 6)
 
-# Update the user / computer points
-user_points += user_one + user_two
-comp_points += comp_one + comp_two
+# Retrieve user points (first item returned from function)
+user_points = initial_user[0]
+comp_points = initial_comp[0]
 
-# Output the results
-print("\nInitial points")
-print(f"User    - Roll 1: {user_one} \t| Roll 2: {user_two} \t| Total: {user_points} ")
-print(f"Computer    - Roll 1: {user_one} \t| Roll 2: {user_two} \t| Total: {user_points} ")
-
+double_user = initial_user[1]
 
 # Let the user know if they qualify for double points
-if double_user == "yes":
-    print("Great news = if you win, you will earn double points!")
+  if double_user == "yes":
+   print("Great news = if you win, you will earn double points!")
+
+# assume user goes first...
+first = "User"
+second = "Computer"
+player_1_points = user_points
+player_2_points = comp_points
+
+
+# if user has fewer points, they start the game
+if user_points < comp_points:
+    print("you start because your initial roll was less than the computer\n")
+
+# if the user and computer roll equal points, the users is player 1...
+elif user_points == comp_points:
+    print("The initial rolls were the same, the user starts!")
+
+# if the computer has fewer points, switch the computer to 'player 1'
+else:
+    player_1_points, player_2_points = player_2_points, player_1_points
+    first, second = second, first
+
+    # Loop until we have a winner...
+while player_1_points < 13 and player_2_points < 13:
+    print()
+    input("press <enter> to continue this round\n")
+
+    # first person rolls the dice and score is updated
+    player_1_roll = random.randint(1, 6)
+    player_1_points += player_1_roll
+
+    print(f"{second}: Rolled a {player_2_roll} - has {player_2_points} points")
+
+    # if the first person's score is over 13, end the round
+    if player_1_points >= 13:
+        break
+
+        #second person rolls the dice (and score is updated)
+        player_2_roll = random.randint (1, 6)
+        player_2_points += player_2_roll
+
+        print(f"{second}: Rolled a {player_2_roll} - has {player_2_points} points")
+
+        print(f"{first}: {player_1_points} | {second} {player_2_points}")
+
+        print("end of round")
+
+
