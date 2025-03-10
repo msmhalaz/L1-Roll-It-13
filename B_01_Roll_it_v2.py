@@ -136,19 +136,19 @@ while comp_score < game_goal and user_score < game_goal:
         player_1_roll = random.randint(1, 6)
         player_1_points += player_1_roll
 
-        print(f"{second}: Rolled a {player_1_roll} - has {player_1_points} points")
+        print(f"{first}: Rolled a {player_1_roll} - has {player_1_points} points")
 
         # if the first person's score is over 13, end the round
         if player_1_points >= 13:
             break
 
-            # second person rolls the dice (and score is updated)
-            player_2_roll = random.randint(1, 6)
-            player_2_points += player_2_roll
+        # second person rolls the dice (and score is updated)
+        player_2_roll = random.randint(1, 6)
+        player_2_points += player_2_roll
 
-            print(f"{second}: Rolled a {player_2_roll} - has {player_2_points} points")
+        print(f"{second}: Rolled a {player_2_roll} - has {player_2_points} points")
 
-            print(f"{first}: {player_1_points} | {second} {player_2_points}")
+        print(f"{first}: {player_1_points} | {second} {player_2_points}")
 
     # end of round
 
